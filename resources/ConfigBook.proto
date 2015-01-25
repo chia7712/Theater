@@ -1,0 +1,9 @@
+package protos;
+
+option java_package = "net.spright.theater.protos";
+option java_outer_classname = "ConfigBookProtos";
+
+message ConfigBook {
+    required string playerPath = 1;
+    required string movieDir = 2;
+}

@@ -1,0 +1,14 @@
+package protos;
+
+option java_package = "net.spright.theater.protos";
+option java_outer_classname = "ClickBookProtos";
+
+message Click {
+    required string id = 1;
+    optional int64 count = 2 [default = 0];
+    optional bool favorite = 3 [default = false];
+}
+
+message ClickBook {
+    repeated Click click = 1;
+}
