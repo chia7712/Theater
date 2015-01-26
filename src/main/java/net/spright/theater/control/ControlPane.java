@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -136,78 +134,6 @@ public class ControlPane extends BorderPane implements Closeable {
         }
         public String getDescription() {
             return desc;
-        }
-    }
-    private static class MovieInfoPane extends BorderPane implements Subject {
-        public enum Action{Play, Delete, Nothing};
-        private final MovieInfo movieInfo;
-        private final Label countLabel = new Label();
-        private final BaseSubject subject = new BaseSubject();
-        private Action action = Action.Nothing;
-        public MovieInfoPane(MovieInfo movieInfo) throws Exception {
-            this.movieInfo = movieInfo;
-            Image image = new Image(movieInfo.getCoverFile().toURI().toString());
-            if (image.isError()) {
-                throw image.getException();
-            }
-            Button playBtn = new Button("播放");
-            playBtn.setOnAction(e -> {
-                movieInfo.click();
-                countLabel.setText(String.valueOf(movieInfo.getCount()));
-                action = Action.Play;
-                subject.inform();
-            });
-            Button deleteBtn = new Button("刪除");
-            deleteBtn.setOnAction(e -> {
-                action = Action.Delete;
-                subject.inform();
-            });
-            ImageViewPane view = new ImageViewPane(new ImageView(image));
-            view.setSmooth(true);
-            view.setPreserveRatio(true);
-            countLabel.setText(String.valueOf(movieInfo.getCount()));
-            this.setCenter(view);
-
-            CheckBox favoriteBox = new CheckBox();
-            favoriteBox.setSelected(movieInfo.getFavorite());
-            favoriteBox.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                movieInfo.setFavorite(newValue);
-            });
-            HBox box = new HBox();
-            box.setAlignment(Pos.CENTER);
-            box.setPadding(new Insets(5, 10, 5, 10));
-            FilenameUtils.getBaseName(movieInfo.getVideo()).ifPresent((name) -> {
-                box.getChildren().add(new Label(name));
-            });
-            box.getChildren().add(playBtn);
-            box.getChildren().add(deleteBtn);
-            box.getChildren().add(new Label("   "));
-            box.getChildren().add(new Label("點擊數："));
-            box.getChildren().add(countLabel);
-            box.getChildren().add(new Label("   "));
-            box.getChildren().add(new Label("最愛"));
-            box.getChildren().add(favoriteBox);
-            this.setTop(box);
-        }
-        public MovieInfo getMovieInfo() {
-            return movieInfo;
-        }
-        public Action getAction() {
-            return action;
-        }
-        @Override
-        public boolean attach(Observer observer) {
-            return subject.attach(observer);
-        }
-
-        @Override
-        public boolean detach(Observer observer) {
-            return subject.detach(observer);
-        }
-
-        @Override
-        public void inform() {
-            subject.inform();
         }
     }
     private static class PrimaryPane extends BorderPane implements Closeable, Subject {

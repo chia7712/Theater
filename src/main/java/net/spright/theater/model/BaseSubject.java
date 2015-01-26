@@ -5,7 +5,6 @@
  */
 package net.spright.theater.model;
 
-import net.spright.theater.player.*;
 import java.util.LinkedList;
 import java.util.List;
 import net.spright.theater.control.Observer;
