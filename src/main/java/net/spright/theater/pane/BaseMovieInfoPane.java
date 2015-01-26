@@ -31,7 +31,7 @@ public class BaseMovieInfoPane extends BorderPane implements MovieInfoPane {
     private final MovieInfo movieInfo;
     private final Label countLabel = new Label();
     private final BaseSubject subject = new BaseSubject();
-    private Action action = Action.Nothing;
+    private Action currentAction = Action.Nothing;
     public BaseMovieInfoPane(MovieInfo movieInfo) throws Exception {
         this.movieInfo = movieInfo;
         Image image = new Image(movieInfo.getCoverFile().toURI().toString());
@@ -42,12 +42,12 @@ public class BaseMovieInfoPane extends BorderPane implements MovieInfoPane {
         playBtn.setOnAction(e -> {
             movieInfo.click();
             countLabel.setText(String.valueOf(movieInfo.getCount()));
-            action = Action.Play;
+            currentAction = Action.Play;
             subject.inform();
         });
         Button deleteBtn = new Button("刪除");
         deleteBtn.setOnAction(e -> {
-            action = Action.Delete;
+            currentAction = Action.Delete;
             subject.inform();
         });
         ImageViewPane view = new ImageViewPane(new ImageView(image));
@@ -87,7 +87,7 @@ public class BaseMovieInfoPane extends BorderPane implements MovieInfoPane {
     }
     @Override
     public Action getAction() {
-        return action;
+        return currentAction;
     }
     @Override
     public boolean attach(Observer observer) {

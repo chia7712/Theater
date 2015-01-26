@@ -6,6 +6,7 @@
 package net.spright.theater.pane;
 
 import java.io.Closeable;
+import java.io.IOException;
 import java.util.List;
 import javafx.scene.Node;
 import net.spright.theater.model.MovieInfo;
@@ -17,10 +18,10 @@ import net.spright.theater.model.Subject;
  */
 public interface MovieListPane extends Subject, Closeable {
     public enum Action {
-        Back, Hot, Favorite, Random, Next;
+        Back, Hot, Favorite, Random, Next, Nothing;
     }
     public List<MovieInfo> getMovieInfos();
-    public void updateContent();
+    public void updateContent() throws IOException;
     public Action getAction();
     public Node asNode();
 }
