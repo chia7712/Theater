@@ -15,10 +15,10 @@ public class MainApp extends Application {
         }
     }
     private final FXMLLoader myLoader = new FXMLLoader();
-    private ControlPane pane;
+    private PrimaryPane pane;
     @Override
     public void start(Stage stage) throws Exception {
-        pane = new ControlPane();
+        pane = new PrimaryPane();
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.setTitle("Custom Control");

@@ -26,14 +26,14 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
-import net.spright.theater.model.BaseSubject;
+import net.spright.theater.model.AbstractSubject;
 import net.spright.theater.model.MovieInfo;
 
 /**
  *
  * @author ChiaPing Tsai <chia7712@gmail.com>
  */
-public class SimplePlayer extends BaseSubject implements MoviePlayer {
+public class SimplePlayer extends AbstractSubject implements MoviePlayer {
     private static final String PLAY_STRING = ">";
     private static final String PAUSED_STRING = "||";
     private static final String STOP_STRING = "X";
@@ -50,9 +50,9 @@ public class SimplePlayer extends BaseSubject implements MoviePlayer {
             pane.updateValues();
             Status status = mp.getStatus();
             if (status == Status.UNKNOWN || status == Status.HALTED) {
-            }
-            
-            if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
+                mp.stop();
+                inform();
+            } else if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
                 // rewind the movie if we're sitting at the end
                 if (atEndOfMedia) {
                     mp.seek(mp.getStartTime());
@@ -92,13 +92,13 @@ public class SimplePlayer extends BaseSubject implements MoviePlayer {
             pane.updateValues();
             inform();
         });
-
+        mp.setOnHalted(() -> {
+            inform();
+        });
         mp.setOnStopped(() -> {
-            mp.stop();
             inform();
         });
         mp.setOnEndOfMedia(() -> {
-            mp.stop();
             inform();
         });
 
@@ -131,7 +131,11 @@ public class SimplePlayer extends BaseSubject implements MoviePlayer {
     public Node asNode() {
         return pane;
     }
-
+    @Override
+    public void close() throws IOException {
+        mp.stop();
+        mp.dispose();
+    }
     private static class PlayerPane extends BorderPane {
         private final MediaView mediaView;
         private final Slider timeSlider = new Slider();
@@ -161,7 +165,11 @@ public class SimplePlayer extends BaseSubject implements MoviePlayer {
             mediaBar.getChildren().add(stopButton);
             mediaBar.getChildren().add(timeSlider);
             mediaBar.getChildren().add(volumeSlider);
-            
+            Pane mvPane = new Pane();
+            mvPane.getChildren().add(mediaView);
+            mvPane.setId("mediaViewPane");
+            setCenter(mvPane);
+            setBottom(mediaBar);
         }
         public void setDuration(Duration duration) {
             this.duration = duration;
@@ -180,13 +188,6 @@ public class SimplePlayer extends BaseSubject implements MoviePlayer {
         }
         public Slider getTimeSlider() {
             return timeSlider;
-        }
-        private void initPane() {
-            Pane mvPane = new Pane();
-            mvPane.getChildren().add(mediaView);
-            mvPane.setId("mediaViewPane");
-            setCenter(mvPane);
-            setBottom(mediaBar);
         }
         private void updateValues() {
             if (timeSlider != null && volumeSlider != null) {
@@ -251,9 +252,5 @@ public class SimplePlayer extends BaseSubject implements MoviePlayer {
     }
 
 
-    @Override
-    public void close() throws IOException {
-        mp.stop();
-        mp.dispose();
-    }
+
 }

@@ -16,6 +16,9 @@ import net.spright.theater.model.Subject;
  * @author 嘉平
  */
 public interface MoviePlayer extends Subject, Closeable {
+    public static MoviePlayer getDefaultMoviePlayer(MovieInfo movieInfo) {
+        return new SimplePlayer(movieInfo);
+    }
     public Status getStatus();
     public MovieInfo getMovieInfo();
     public Node asNode();

@@ -13,9 +13,8 @@ import java.io.File;
  */
 public class TConstants {
     public static final String[] DEFAULT_VIDEO_EXTENSIONS = {"wmv", "mkv", "avi", "mp4", "m4v"};
-    public static final String[] DEFAULT_COVER_EXTENSIONS = {"jpg", "jpeg"};
+    public static final String[] DEFAULT_COVER_EXTENSIONS = {"jpg", "jpeg", "png"};
     public static final File DEFAULT_LOG_FILE = new File("D:\\movie.log");
-    public static final File DEFAULT_MOVIE_DIR = new File("D:\\延年益壽");
-//    public static final File DEFAULT_MOVIE_DIR = new File("D:\\test");
+    public static final File DEFAULT_MOVIE_DIR = new File("D:\\影片");
     private TConstants(){}
 }

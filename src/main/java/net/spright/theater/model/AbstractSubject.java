@@ -11,10 +11,11 @@ import net.spright.theater.control.Observer;
 
 /**
  *
- * @author 嘉平
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
-public class BaseSubject implements Subject {
+public abstract class AbstractSubject implements Subject {
     protected final List<Observer> observers = new LinkedList();
+
     @Override
     public boolean attach(Observer observer) {
         return observers.add(observer);
@@ -29,5 +30,4 @@ public class BaseSubject implements Subject {
     public void inform() {
         observers.parallelStream().forEach((Observer observer) -> observer.update(this));
     }
-    
 }

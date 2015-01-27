@@ -28,6 +28,9 @@ import net.spright.theater.tools.FilenameUtils;
  * @author ChiaPing Tsai <chia7712@gmail.com>
  */
 public class MovieManager {
+    public static MovieManager getDefaultMovieManager() {
+        return MovieManager.newBuilder().build();
+    }
     public static Builder newBuilder() {
         return new Builder();
     }
@@ -37,7 +40,6 @@ public class MovieManager {
         private List<String> videoExtension = new LinkedList();
         private List<String> coverExtension = new LinkedList();
         private Builder() {
-            
         }
         public MovieManager build() {
             return new MovieManager(
@@ -153,10 +155,13 @@ public class MovieManager {
     }
     private static Map<String, File> toMap(File[] files) {
         Map<String, File> rval = new HashMap();
-        Stream.of(files).forEach(file -> {
-            Optional<String> id = FilenameUtils.getBaseName(file);
-            id.ifPresent(name -> rval.put(name.toUpperCase(), file));
-        });
+        if (files != null && files.length != 0) {
+            Stream.of(files).forEach(file -> {
+                Optional<String> id = FilenameUtils.getBaseName(file);
+                id.ifPresent(name -> rval.put(name.toUpperCase(), file));
+            });
+        }
+
         return rval;
     }
     public boolean saveWOException() {
