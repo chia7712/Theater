@@ -16,7 +16,7 @@ import net.spright.theater.player.MoviePlayer;
 
 /**
  *
- * @author ChiaPing Tsai <chia7712@gmail.com>
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
 public class PrimaryPane extends BorderPane implements Closeable {
     private final MoviePane moviePane = MoviePane.getMoviePane(MovieManager.getDefaultMovieManager());

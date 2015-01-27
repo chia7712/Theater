@@ -9,7 +9,7 @@ import java.io.File;
 
 /**
  *
- * @author ChiaPing Tsai <chia7712@gmail.com>
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
 public class TConstants {
     public static final String[] DEFAULT_VIDEO_EXTENSIONS = {"wmv", "mkv", "avi", "mp4", "m4v"};

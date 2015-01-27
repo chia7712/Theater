@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 
 /**
  *
- * @author ChiaPing Tsai <chia7712@gmail.com>
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
 public class ByteUtils {
     private static final String UTF8_ENCODING = "UTF-8";

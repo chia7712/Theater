@@ -31,7 +31,7 @@ import net.spright.theater.model.MovieInfo;
 
 /**
  *
- * @author ChiaPing Tsai <chia7712@gmail.com>
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
 public class SimplePlayer extends AbstractSubject implements MoviePlayer {
     private static final String PLAY_STRING = ">";

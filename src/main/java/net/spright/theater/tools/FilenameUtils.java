@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  *
- * @author ChiaPing Tsai <chia7712@gmail.com>
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
 public class FilenameUtils {
     private static final char UNIX_SEPARATOR = '/';

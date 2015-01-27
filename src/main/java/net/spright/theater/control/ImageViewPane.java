@@ -16,7 +16,7 @@ import javafx.scene.layout.Region;
 
 /**
  *
- * @author ChiaPing Tsai <chia7712@gmail.com>
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
 public class ImageViewPane extends Region {
     private final ObjectProperty<ImageView> imageViewProperty = new SimpleObjectProperty();

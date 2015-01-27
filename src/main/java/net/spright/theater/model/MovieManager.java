@@ -25,7 +25,7 @@ import net.spright.theater.tools.FilenameUtils;
 
 /**
  *
- * @author ChiaPing Tsai <chia7712@gmail.com>
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
 public class MovieManager {
     public static MovieManager getDefaultMovieManager() {

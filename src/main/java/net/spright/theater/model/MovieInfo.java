@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
 import net.spright.theater.protos.ClickBookProtos.Click;
 /**
  *
- * @author ChiaPing Tsai <chia7712@gmail.com>
+ * @author Tsai ChiaPing <chia7712@gmail.com>
  */
 public class MovieInfo implements Comparable<MovieInfo> {
     private final String id;

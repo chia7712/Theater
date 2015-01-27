@@ -14,6 +14,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <mainClass>net.spright.theater.control.MainApp</mainClass>
+        <protobuf.version>2.6.1</protobuf.version>
     </properties>
 
     <organization>
@@ -24,7 +25,7 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>2.6.1</version>
+            <version>${protobuf.version}</version>
         </dependency>
     </dependencies>
     <build>
